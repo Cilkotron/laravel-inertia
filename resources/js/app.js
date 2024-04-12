@@ -1,5 +1,8 @@
 import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/vue3'
+import { createInertiaApp, router } from '@inertiajs/vue3'
+import NProgress from 'nprogress'
+
+
 
 createInertiaApp({
   resolve: name => {
@@ -11,5 +14,13 @@ createInertiaApp({
       .use(plugin)
       .mount(el)
   },
+  progress: {
+    color: 'red', 
+    showSpinner: true 
+  }
+
 })
+
+router.on('start', () => NProgress.start())
+router.on('finish', () => NProgress.done())
 
