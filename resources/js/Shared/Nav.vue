@@ -1,23 +1,26 @@
 <template>
-    <nav>
-        <ul>
+    <nav class="mt-6">
+        <ul class="list-disc">
             <li>
-                <Link href="/">Home</Link>
+                <NavLink href="/">Home</NavLink>
             </li>
             <li>
-                <Link href="/users">Users</Link>
+                <NavLink href="/users">Users</NavLink>
             </li>
             <li>
-                <Link href="/settings">Settings</Link>
+                <NavLink href="/settings">Settings</NavLink>
+            </li>
+            <li>
+                <NavLink href="/logout" method="post" as="button">Logout</NavLink>
             </li>
         </ul>
     </nav>
 </template>
 
 <script>
-import { Link } from "@inertiajs/vue3";
+import NavLink from './NavLink.vue';
 
 export default {
-    components: { Link },
+    components: { NavLink },
 };
 </script>
