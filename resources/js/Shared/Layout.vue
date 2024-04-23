@@ -6,8 +6,10 @@
         </header>
     </section>
     <section class="p-6">
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-3xl mx-auto mb-6">
             <iframe
+                width="750"
+                height="350"
                 src="https://www.youtube.com/embed/AJlpR1ejF6A?si=2A_mwKvM92Kbos50"
                 title="YouTube video player"
                 frameborder="0"
@@ -15,6 +17,8 @@
                 referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen
             ></iframe>
+        </div>
+        <div class="max-w-3xl mx-auto">
             <h1 class="text-3xl">
                 <slot />
             </h1>
