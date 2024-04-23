@@ -1,7 +1,8 @@
 import { createApp, h } from 'vue'
-import { createInertiaApp, router } from '@inertiajs/vue3'
+import { createInertiaApp, router, Head, Link } from '@inertiajs/vue3'
 import NProgress from 'nprogress'
 import Layout  from './Shared/Layout.vue'
+
 
 
 
@@ -15,13 +16,15 @@ createInertiaApp({
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
       .use(plugin)
+      .component("Head", Head)
+      .component("Link", Link)
       .mount(el)
   },
   progress: {
     color: 'red', 
     showSpinner: true 
-  }
-
+  },
+  title: title => `${title} - LI App`,
 })
 
 router.on('start', () => NProgress.start())
