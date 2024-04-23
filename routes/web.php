@@ -11,19 +11,18 @@ Route::get('/', function () {
 });
 
 Route::get('/users', function () {
-   $users =  User::query()
-            ->when(Request::input('search'), function ($query, $search) {
-                $query->where('name', 'like', "%$search%");
-            });
-       
-            
+    $users =
+        User::query()
+        ->when(Request::input('search'), function ($query, $search) {
+            $query->where('name', 'like', "%$search%");
+        });
     return Inertia::render('Users', [
-        'users' => 
+        'users' =>
         $users
             ->withQueryString()
-            ->through(fn($user) => [
+            ->through(fn ($user) => [
                 'id' => $user->id,
-                'name' => $user->name, 
+                'name' => $user->name,
                 'email' => $user->email
             ]),
         'filters' => Request::only(['search'])
