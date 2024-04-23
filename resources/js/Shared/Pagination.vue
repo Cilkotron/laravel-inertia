@@ -16,9 +16,9 @@
 </template>
 
 <script>
-export default {
-    props: {
-        links: Array,
-    },
-};
+    export default{
+        props: {
+            links: Array
+        }
+    }
 </script>
