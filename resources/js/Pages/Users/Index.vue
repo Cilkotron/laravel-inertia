@@ -11,7 +11,7 @@
     <div class="flex justify-between py-6">
          <div class="flex items-center">
             <h1 class="text-3xl">Users</h1>
-            <Link v-if="can.createUser" href="/users/create" class="text-blue-500 text-sm mt-2 font-semibold ml-3 py-2 px-3 rounded rounded-xl hover:underline hover:bg-gray-200">New User</Link>
+            <Link v-if="can" href="/users/create" class="text-blue-500 text-sm mt-2 font-semibold ml-3 py-2 px-3 rounded rounded-xl hover:underline hover:bg-gray-200">New User</Link>
          </div>
 
         <input type="search" v-model="search" placeholder="Search..."  class="border px-2 rounded-lg">
