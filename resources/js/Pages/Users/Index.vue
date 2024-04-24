@@ -9,17 +9,28 @@
     </Head>
 
     <div class="flex justify-between py-6">
-         <div class="flex items-center">
+        <div class="flex items-center">
             <h1 class="text-3xl">Users</h1>
-            <Link v-if="can" href="/users/create" class="text-blue-500 text-sm mt-2 font-semibold ml-3 py-2 px-3 rounded rounded-xl hover:underline hover:bg-gray-200">New User</Link>
-         </div>
+            <Link
+                v-if="can"
+                href="/users/create"
+                class="text-blue-500 text-sm mt-2 font-semibold ml-3 py-2 px-3 rounded rounded-xl hover:underline hover:bg-gray-200"
+            >
+                New User</Link
+            >
+        </div>
 
-        <input type="search" v-model="search" placeholder="Search..."  class="border px-2 rounded-lg">
+        <input
+            type="search"
+            v-model="search"
+            placeholder="Search..."
+            class="border px-2 rounded-lg"
+        />
     </div>
 
     <ul role="list" class="divide-y divide-gray-100">
         <li
-        v-if="users.data.length > 0"
+            v-if="users.data.length > 0"
             class="flex justify-between gap-x-6 py-5"
             v-for="user in users.data"
             :key="user.id"
@@ -32,7 +43,15 @@
                 </div>
             </div>
             <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                <p class="text-sm leading-6 text-gray-900">{{ user.email }}</p>
+                <div class="text-sm leading-6 text-gray-900">
+                    {{ user.email }}
+                    <span v-if="user.can.edit">
+                        <Link
+                            class="text-blue-400 hover:underline font-semibold ms-6"
+                            >Edit</Link
+                        >
+                    </span>
+                </div>
             </div>
         </li>
     </ul>
@@ -41,24 +60,30 @@
 </template>
 
 <script setup>
-import Pagination from '../../Shared/Pagination.vue';
-import { ref, watch } from 'vue'; 
-import { router } from '@inertiajs/vue3';
-import debounce from 'lodash/debounce'; 
+import Pagination from "../../Shared/Pagination.vue";
+import { ref, watch } from "vue";
+import { router } from "@inertiajs/vue3";
+import debounce from "lodash/debounce";
 
 let props = defineProps({
     users: Object,
     filters: Object,
-    can: Object
+    can: Object,
 });
 
-let search = ref(props.filters.search || '');
+let search = ref(props.filters.search || "");
 
-watch(search, debounce(function(value) {
-    router.get('/users', { search: value }, {
-        preserveState: true,
-        replace: true
-    });
-}, 500));
-
+watch(
+    search,
+    debounce(function (value) {
+        router.get(
+            "/users",
+            { search: value },
+            {
+                preserveState: true,
+                replace: true,
+            }
+        );
+    }, 500)
+);
 </script>

@@ -13,4 +13,9 @@ class UserPolicy
         return $user->email === 'sanjabudic@gmail.com';
     }
 
+    public function edit(User $user, User $model): bool
+    {
+        return (bool) mt_rand(0, 1); 
+    }
+
 }

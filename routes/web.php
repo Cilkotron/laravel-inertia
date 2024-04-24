@@ -33,7 +33,10 @@ Route::middleware('auth')->group(function() {
                 ->through(fn ($user) => [
                     'id' => $user->id,
                     'name' => $user->name,
-                    'email' => $user->email
+                    'email' => $user->email, 
+                    'can' => [
+                        'edit' => Auth::user()->can('edit', $user)
+                    ]
                 ]), 
             'filters' => Request::only(['search']),
             'can' => Auth::user()->can('create', User::class)
