@@ -9,12 +9,17 @@
     </Head>
 
     <div class="flex justify-between py-6">
-        <h1 class="text-3xl">Users</h1>
+         <div class="flex items-center">
+            <h1 class="text-3xl">Users</h1>
+            <Link href="/users/create" class="text-blue-500 text-sm mt-2 font-semibold ml-3 py-2 px-3 rounded rounded-xl hover:underline hover:bg-gray-200" >New User</Link>
+         </div>
+
         <input type="search" v-model="search" placeholder="Search..."  class="border px-2 rounded-lg">
     </div>
 
     <ul role="list" class="divide-y divide-gray-100">
         <li
+        v-if="users.data.length > 0"
             class="flex justify-between gap-x-6 py-5"
             v-for="user in users.data"
             :key="user.id"
@@ -32,26 +37,26 @@
         </li>
     </ul>
 
-    <Pagination :links="users.links"></Pagination>
+    <Pagination :links="users?.links"></Pagination>
 </template>
 
 <script setup>
-import Pagination from '../Shared/Pagination.vue'; 
+import Pagination from '../../Shared/Pagination.vue';
 import { ref, watch } from 'vue'; 
-import { router } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3';
 
 let props = defineProps({
     users: Object,
     filters: Object
-})
+});
 
-let search = ref(props.filters.search ||'');
+let search = ref(props.filters.search || '');
 
 watch(search, value => {
     router.get('/users', {search: value }, {
         preserveState: true,
         replace: true
     }) 
-})
+});
 
 </script>
